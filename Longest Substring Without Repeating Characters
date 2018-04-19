@@ -1,0 +1,31 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        char[] ch=s.toCharArray();  
+        int ma[]=new int[128];
+        int count=0,temp=0;
+        int start=0,end=0;
+        for(int i=0;i<ma.length;i++)
+             ma[i] = -1;
+        for(int i=0;i<ch.length;i++){
+            
+            end=i;            
+            int min=i;
+            if(ma[ch[i]]>-1){
+               int num = ma[ch[i]];
+                for(int t=0;t<ma.length;t++){
+                    if(ma[t]<=num){
+                        ma[t] = -1;
+                    }else{
+                        min=Math.min(min,ma[t]);
+                    }
+                }
+                start=min;
+            }
+           
+            temp=end-start+1;
+            count=Math.max(count,temp);
+            ma[ch[i]]=i;
+        } 
+        return count;
+    }
+}
